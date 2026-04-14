@@ -40,7 +40,7 @@ def login():
         "user": row[1]
     })
 
-@app.route("/products", methods=["GET"])
+@app.route("/product/getAllProduct", methods=["GET"])
 def get_all_products():
     cursor = conn.cursor()
     cursor.execute("SELECT ProductID, ProductName, Category, Price, Stock, Descript, Discount, ProductImage FROM tblProduct")
@@ -54,7 +54,7 @@ def get_all_products():
         })
     return jsonify(result)
 
-@app.route('/api/add_to_cart', methods=['POST'])
+@app.route('/cart/add', methods=['POST'])
 def add_to_cart():
     data = request.json
     acc_id = data.get('account_id')
@@ -72,7 +72,7 @@ def add_to_cart():
     conn.commit()
     return jsonify({"message": "Success"})
 
-@app.route("/api/get_cart/<int:acc_id>", methods=["GET"])
+@app.route("/cart/getByUserId/<int:acc_id>", methods=["GET"])
 def get_cart_items(acc_id):
     cursor = conn.cursor()
     # JOIN với bảng sản phẩm để lấy thông tin hiển thị
@@ -87,7 +87,7 @@ def get_cart_items(acc_id):
     cart = [{"ProductID": r[0], "ProductName": r[1], "Price": float(r[2]), "ProductImage": r[3], "Quantity": r[4]} for r in rows]
     return jsonify(cart)
 
-@app.route("/api/remove_cart", methods=["POST"])
+@app.route("/cart/remove", methods=["POST"])
 def remove_cart():
     data = request.json
     cursor = conn.cursor()
@@ -96,7 +96,7 @@ def remove_cart():
     conn.commit()
     return jsonify({"message": "Deleted"})
 # # 4. API Cập nhật số lượng (Dùng cho nút + / - trong cart.js)
-@app.route('/api/update_cart_quantity', methods=['POST'])
+@app.route('/cart/update', methods=['POST'])
 def update_cart_quantity():
     data = request.json
     acc_id = data.get('account_id')

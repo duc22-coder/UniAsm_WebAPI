@@ -17,7 +17,7 @@ async function loadCheckoutData() {
     if (!container || !userId) return;
 
     try {
-        const res = await fetch(`http://127.0.0.1:5000/api/get_cart/${userId}`);
+        const res = await fetch(`http://127.0.0.1:5000/cart/getByUserId/${userId}`);
         const cartItems = await res.json();
         let subtotal = 0;
 

@@ -2,7 +2,7 @@ const fetchProducts = () => {
     const container = document.getElementById('product-container');
     if (!container) return;
 
-    fetch('http://127.0.0.1:5000/products')
+    fetch('http://127.0.0.1:5000/product/getAllProduct')
         .then(res => res.json())
         .then(products => {
             container.innerHTML = products.map(product => `
@@ -35,7 +35,7 @@ function addToCart(productId) {
         return;
     }
 
-    fetch('http://127.0.0.1:5000/api/add_to_cart', {
+    fetch('http://127.0.0.1:5000/cart/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ account_id: userId, product_id: productId })

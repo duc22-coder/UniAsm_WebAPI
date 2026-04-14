@@ -12,7 +12,7 @@ async function loadCart() {
     }
 
     try {
-        const res = await fetch(`http://127.0.0.1:5000/api/get_cart/${userId}`);
+        const res = await fetch(`http://127.0.0.1:5000/cart/getByUserId/${userId}`);
         const cartItems = await res.json();
         let subtotal = 0;
 
@@ -79,7 +79,7 @@ async function updateQuantity(productId, change) {
     const userId = localStorage.getItem("accountID");
 
     try {
-        await fetch(`http://127.0.0.1:5000/api/update_cart_quantity`, {
+        await fetch(`http://127.0.0.1:5000/cart/update`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -98,7 +98,7 @@ async function removeFromCart(productId) {
     const userId = localStorage.getItem("accountID");
     if (!confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) return;
 
-    await fetch(`http://127.0.0.1:5000/api/remove_cart`, {
+    await fetch(`http://127.0.0.1:5000/cart/remove`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ account_id: userId, product_id: productId })
