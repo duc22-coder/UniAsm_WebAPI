@@ -2,7 +2,9 @@
 USE Fruitables;
 GO
 
+
 -- 1. Chèn dữ liệu vào tblAccount
+SET IDENTITY_INSERT tblAccount ON;
 INSERT INTO tblAccount
     (AccountID, UserName, Passwd, UserAddress, Phone, AccountRole)
 VALUES
@@ -11,8 +13,9 @@ VALUES
     (3, N'Hoàng Đức Trọng', '123456', N'Đà Nẵng', '0900000003', 'ADMIN'),
     (4, N'Phùng Tuấn Đạt', '123456', N'TP. Hồ Chí Minh', '0900000004', 'USER'),
     (5, N'Nguyễn Duy Minh', '123456', N'Cần Thơ', '0900000005', 'USER');
+SET IDENTITY_INSERT tblAccount OFF;
 
-
+SET IDENTITY_INSERT tblProduct ON;
 INSERT INTO tblProduct
     (ProductID, ProductName, Category, Price, Stock, DueDate, Descript, Discount, ProductImage)
 VALUES
@@ -21,8 +24,10 @@ VALUES
     (3, N'Cam', N'Trái cây', 30000, 150, '2026-11-15', N'Cam sành mọng nước, nhiều vitamin C', 0, N'orange.jpg'),
     (4, N'Cà rốt', N'Rau củ', 25000, 120, '2026-09-20', N'Cà rốt Đà Lạt tươi sạch mỗi ngày', 15, N'carrot.jpg'),
     (5, N'Bông cải', N'Rau củ', 40000, 80, '2026-08-30', N'Bông cải xanh giàu chất xơ', 20, N'broccoli.jpg');
+SET IDENTITY_INSERT tblProduct OFF;
 
 -- 3. Chèn dữ liệu vào tblInvoice
+SET IDENTITY_INSERT tblInvoice ON;
 INSERT INTO tblInvoice
     (InvoiceID, AccountID, TotalPayment, InvoiceState)
 VALUES
@@ -31,8 +36,10 @@ VALUES
     (3, 3, 150000, N'Đã thanh toán'),
     (4, 4, 300000, N'Đang giao hàng'),
     (5, 5, 250000, N'Đã thanh toán');
+SET IDENTITY_INSERT tblInvoice OFF;
 
 -- 4. Chèn dữ liệu vào tblPayment
+SET IDENTITY_INSERT tblPayment ON;
 INSERT INTO tblPayment
     (PaymentID, InvoiceID, Paying_method, Paying_date)
 VALUES
@@ -41,8 +48,10 @@ VALUES
     (3, 3, N'Ví MoMo', '2026-04-03'),
     (4, 4, N'Tiền mặt (COD)', '2026-04-04'),
     (5, 5, N'Chuyển khoản', '2026-04-05');
+SET IDENTITY_INSERT tblPayment OFF;
 
 -- 5. Chèn dữ liệu vào tblOrder
+SET IDENTITY_INSERT tblOrder ON;
 INSERT INTO tblOrder
     (OrderID, DeliveryMethod, InvoiceID, OrderAddress, Phone)
 VALUES
@@ -51,8 +60,10 @@ VALUES
     (3, N'Giao hỏa tốc', 3, N'Đà Nẵng', '0900000003'),
     (4, N'Giao tiêu chuẩn', 4, N'TP. Hồ Chí Minh', '0900000004'),
     (5, N'Giao nhanh', 5, N'Cần Thơ', '0900000005');
+SET IDENTITY_INSERT tblOrder OFF;
 
 -- 6. Chèn dữ liệu vào tblInvoiceDetail
+SET IDENTITY_INSERT tblInvoiceDetail ON;
 INSERT INTO tblInvoiceDetail
     (InvoiceDetailID, InvoiceID, ProductID, Quantity)
 VALUES
@@ -61,6 +72,7 @@ VALUES
     (3, 3, 3, 3),
     (4, 4, 4, 4),
     (5, 5, 5, 1);
+SET IDENTITY_INSERT tblInvoiceDetail OFF;
 
 -- 7. Chèn dữ liệu vào tblCart
 INSERT INTO tblCart
@@ -71,3 +83,4 @@ VALUES
     (3, 3, 1),
     (4, 4, 5),
     (5, 5, 2);
+
